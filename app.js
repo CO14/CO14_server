@@ -12,12 +12,14 @@ const users = require('./api/users');
 const auth = require('./auth/index');
 const authMiddleware = require('./auth/middleware');
 
+require('dotenv').config();
+
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
-  methods: "GET,PUT,POST,DELETE",
   credentials: true,
+  methods: "GET,PUT,POST,DELETE",
   preflightContinue: false
-}))
+}));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
