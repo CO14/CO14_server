@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const queries = require('../db/queries');
+const bcrypt = require('bcrypt');
 const authMiddleware = require('../auth/middleware');
 
 function isValidId(req, res, next) {
@@ -46,6 +47,32 @@ router.get('/:id', isValidId, (req, res, next) => {
       });
       res.json(userProfile)
     });
+});
+
+router.put('/:id', isValidId, (req, res, next) => {
+  bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+      const account = {
+        id: req.body.id,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        password: hash,
+        image: req.body.image,
+        facebook_url: req.body.facebook_url,
+        instagram_url: req.body.instagram_url,
+        twitter_url: req.body.twitter_url
+      };
+      queries.updateUserProfile(account)
+        .then(profile => {
+          res.json({
+            message: "Profile Updated"
+          });
+        });
+    });
+});
+
+router.delete(':/id', isValidId, (req, res, next) => {
+  
 });
 
 module.exports = router;

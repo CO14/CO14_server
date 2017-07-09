@@ -1,4 +1,5 @@
 const knex = require('./knex');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   getUserByEmail: email => {
@@ -8,6 +9,6 @@ module.exports = {
     return knex('account').insert(account, 'id')
       .then(ids => {
         return ids[0];
-    });
+      });
   }
 };

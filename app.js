@@ -7,6 +7,14 @@ const cors = require('cors');
 
 const app = express();
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN)
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  next();
+});
+
 const users = require('./api/users');
 // const peaks = require('./api/peaks');
 const auth = require('./auth/index');
@@ -14,12 +22,12 @@ const authMiddleware = require('./auth/middleware');
 
 require('dotenv').config();
 
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials: true,
-  methods: "GET,PUT,POST,DELETE",
-  preflightContinue: false
-}));
+// app.use(cors({
+//   origin: process.env.CORS_ORIGIN,
+//   credentials: true,
+//   methods: "GET,PUT,POST,DELETE",
+//   preflightContinue: false
+// }));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
