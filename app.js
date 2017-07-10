@@ -16,21 +16,11 @@ app.use(cors({
   preflightContinue: false
 }));
 
-// app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN)
-//   res.header('Access-Control-Allow-Credentials', true)
-//   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
-//   res.header('Access-Control-Allow-Headers', 'Content-Type')
-//   next();
-// });
-
 const users = require('./api/users');
 const peaks = require('./api/peaks');
 const ranges = require('./api/ranges');
 const auth = require('./auth/index');
 const authMiddleware = require('./auth/middleware');
-
-
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -40,6 +30,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(authMiddleware.checkTokenSetUser);
 app.use('/api/v1/users', users);
 app.use('/api/v1/peaks', peaks);
 app.use('/api/v1/ranges', ranges);

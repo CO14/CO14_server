@@ -12,7 +12,9 @@ function isValidId(req, res, next) {
   }
 }
 
-router.get('/:id', isValidId, (req, res, next) => {
+// authMiddleware.allowAccess
+
+router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   queries.getUserProfilePeak(req.params.id)
     .then(accounts => {
       const userProfile = [];
