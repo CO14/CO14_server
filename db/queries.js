@@ -21,5 +21,8 @@ module.exports = {
         instagram_url: account.instagram_url,
         twitter_url: account.twitter_url
       })
+  },
+  deleteUserProfile: account => {
+    return knex('account').where('id', account.id).del();
   }
 };

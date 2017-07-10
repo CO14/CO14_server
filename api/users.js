@@ -71,8 +71,13 @@ router.put('/:id', isValidId, (req, res, next) => {
     });
 });
 
-router.delete(':/id', isValidId, (req, res, next) => {
-  
+router.delete('/:id', isValidId, (req, res, next) => {
+  queries.deleteUserProfile(req.body)
+    .then(response => {
+      res.json({
+        message: "Profile Deleted"
+      });
+    });
 });
 
 module.exports = router;
