@@ -25,7 +25,8 @@ app.use(cors({
 // });
 
 const users = require('./api/users');
-// const peaks = require('./api/peaks');
+const peaks = require('./api/peaks');
+const ranges = require('./api/ranges');
 const auth = require('./auth/index');
 const authMiddleware = require('./auth/middleware');
 
@@ -40,8 +41,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1/users', users);
-// app.use('/api/v1/peaks', peaks);
-
+app.use('/api/v1/peaks', peaks);
+app.use('/api/v1/ranges', ranges);
 app.use('/auth', auth);
 
 // catch 404 and forward to error handler

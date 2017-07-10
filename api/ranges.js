@@ -4,9 +4,9 @@ const queries = require('../db/queries');
 const authMiddleware = require('../auth/middleware');
 
 router.get('/', (req, res) => {
-  queries.getPeakByName()
-    .then(peaks => {
-      res.json(peaks);
+  queries.getRangeByName()
+    .then(ranges => {
+      res.json(ranges);
     });
 });
 

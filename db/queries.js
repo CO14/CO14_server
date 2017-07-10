@@ -24,5 +24,11 @@ module.exports = {
   },
   deleteUserProfile: account => {
     return knex('account').where('id', account.id).del();
+  },
+  getRangeByName: () => {
+    return knex('range');
+  },
+  getPeakByName: () => {
+    return knex('peak');
   }
 };
