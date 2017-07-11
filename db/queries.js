@@ -25,10 +25,9 @@ module.exports = {
   deleteUserProfile: account => {
     return knex('account').where('id', account.id).del();
   },
-  getRangeByName: () => {
-    return knex('range');
-  },
   getPeakByName: () => {
-    return knex('peak');
+    return knex.select('*').from('peak')
+      .join('range', 'range.id', 'range_id')
+      .select('peak.id as peak_id', 'range.name as range_name')
   }
 };
