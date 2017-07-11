@@ -12,8 +12,6 @@ function isValidId(req, res, next) {
   }
 }
 
-// authMiddleware.allowAccess
-
 router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   queries.getUserProfilePeak(req.params.id)
     .then(accounts => {
@@ -43,6 +41,9 @@ router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
           peak_image_url: acct.image_url,
           account_rating: acct.account_rating,
           account_image_url: acct.account_image_url,
+          account_notes: acct.account_notes,
+          is_complete: acct.is_complete,
+          date_complete: acct.date_complete,
           range_id: acct.range_id,
           range_name: acct.name
         });
@@ -81,6 +82,5 @@ router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) =>
       });
     });
 });
-
 
 module.exports = router;

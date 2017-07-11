@@ -51,14 +51,12 @@ router.get('/', (req, res) => {
 //SIGNUP
 router.post('/signup', (req, res, next) => {
   if(isUserValid(req.body)) {
-    // console.log(req.body);
     User.getUserByEmail(req.body.email)
       .then(user => {
-        // console.log("User: ", user)
+        console.log("User: ", user)
         if(!user) {
           bcrypt.hash(req.body.password, 10)
             .then(hash => {
-              // console.log(hash);
               const account = {
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
@@ -69,10 +67,8 @@ router.post('/signup', (req, res, next) => {
                 instagram_url: req.body.instagram_url,
                 twitter_url: req.body.twitter_url
               };
-              // console.log(account);
               User.createNewAccount(account)
                 .then(id => {
-                  // console.log(id);
                   jwt.sign({
                     id,
                   }, process.env.TOKEN_SECRET, {
@@ -102,14 +98,11 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   if (isLoginValid(req.body)) {
-    // console.log(req.body);
     User.getUserByEmail(req.body.email)
       .then(account => {
-        // console.log(account);
         if (account) {
           bcrypt.compare(req.body.password, account.password)
             .then(result => {
-            // console.log(result);
             if (result) {
               jwt.sign({
                 id: account.id
