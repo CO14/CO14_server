@@ -1,6 +1,7 @@
 const knex = require('./knex');
 
 module.exports = {
+  // USER QUERIES
   getUserByID: id => {
     return knex('account').where('id', id).first();
   },
@@ -25,9 +26,21 @@ module.exports = {
   deleteUserProfile: account => {
     return knex('account').where('id', account.id).del();
   },
+  // PEAK QUERIES
   getPeakByName: () => {
     return knex.select('*').from('peak')
       .join('range', 'range.id', 'range_id')
       .select('peak.id as peak_id', 'range.name as range_name')
+  },
+  addNewUserGoal: account => {
+    // const {account_rating,
+    //         account_image_url,
+    //         account_notes,
+    //         is_complete,
+    //         date_complete,
+    //         account_id,
+    //         peak_id
+    //       } = account;
+    return knex('account_peak').insert(account);
   }
 };

@@ -83,4 +83,13 @@ router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) =>
     });
 });
 
+router.post('/:id/new-goal', isValidId, authMiddleware.allowAccess, (req, res, next) => {
+  queries.addNewUserGoal(req.params.id)
+    .then(response => {
+      res.json({
+        message: "New Mountain Added"
+      });
+    })
+});
+
 module.exports = router;
