@@ -51,7 +51,7 @@ router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
     });
 });
 
-router.put('/:id', isValidId, (req, res, next) => {
+router.put('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const account = {
@@ -73,7 +73,7 @@ router.put('/:id', isValidId, (req, res, next) => {
     });
 });
 
-router.delete('/:id', isValidId, (req, res, next) => {
+router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   queries.deleteUserProfile(req.body)
     .then(response => {
       res.json({
