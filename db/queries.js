@@ -33,14 +33,6 @@ module.exports = {
       .select('peak.id as peak_id', 'range.name as range_name')
   },
   addNewUserGoal: account => {
-    // const {account_rating,
-    //         account_image_url,
-    //         account_notes,
-    //         is_complete,
-    //         date_complete,
-    //         account_id,
-    //         peak_id
-    //       } = account;
     return knex('account_peak').insert(account);
   }
 };

@@ -84,7 +84,8 @@ router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) =>
 });
 
 router.post('/:id/new-goal', isValidId, authMiddleware.allowAccess, (req, res, next) => {
-  queries.addNewUserGoal(req.params.id)
+  console.log(req.body);
+  queries.addNewUserGoal(req.body)
     .then(response => {
       res.json({
         message: "New Mountain Added"
