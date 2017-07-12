@@ -34,6 +34,7 @@ router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
           userCollection[acct.account_id] = userInstance;
         }
         userCollection[acct.account_id].peak.push({
+          account_peak_id: acct.account_peak_id,
           peak_id: acct.peak_id,
           peak_name: acct.peak_name,
           elevation: acct.elevation,

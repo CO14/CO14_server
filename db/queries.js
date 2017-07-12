@@ -6,7 +6,7 @@ module.exports = {
     return knex('account').where('id', id).first();
   },
   getUserProfilePeak: id => {
-    return knex.select('*').from('account').where('account.id', id)
+    return knex.select('*', 'account_peak.id as account_peak_id').from('account').where('account.id', id)
       .join('account_peak', 'account.id', 'account_id')
       .join('peak', 'peak_id', 'peak.id')
       .join('range', 'range_id', 'range.id')
