@@ -84,13 +84,30 @@ router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) =>
     });
 });
 
-router.post('/:id/new-goal', isValidId, authMiddleware.allowAccess, (req, res, next) => {
-  console.log(req.body);
+router.post('/:id/peaks', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   queries.addNewUserGoal(req.body)
     .then(response => {
       res.json({
         message: "New Mountain Added"
       });
+    })
+});
+
+router.put('/:id/peaks', isValidId, authMiddleware.allowAccess, (req,res,next) => {
+  queries.updateUserGoal(req.body)
+    .then(response => {
+      res.json({
+        message: "Goal Complete"
+      })
+    });
+});
+
+router.delete('/:id/peaks', isValidId, authMiddleware.allowAccess, (req,res,next) => {
+  queries.deleteUserGoal(req.body)
+    .then(response => {
+      res.json({
+        message: "Goal Deleted"
+      })
     })
 });
 
