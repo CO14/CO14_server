@@ -33,7 +33,7 @@ module.exports = {
       .select('peak.id as peak_id', 'range.name as range_name')
   },
   addNewUserGoal: user_peak => {
-    return knex('account_peak').insert(user_peak);
+    return knex('account_peak').insert(user_peak, '*');
   },
   updateUserGoal: account_peak => {
     return knex('account_peak').where('id', account_peak.id).update({
