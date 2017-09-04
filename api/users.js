@@ -87,10 +87,10 @@ router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) =>
 router.post('/:id/peaks', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   queries.addNewUserGoal(req.body)
     .then(response => {
-      console.log(response);
-      res.json({
-        message: "New Mountain Added"
-      });
+      res.json(response);
+      // res.json({
+      //   message: "New Mountain Added"
+      // });
     })
 });
 
