@@ -68,9 +68,8 @@ router.put('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
       };
       queries.updateUserProfile(account)
         .then(profile => {
-          res.json({
-            message: "Profile Updated"
-          });
+          console.log(profile);
+          res.json(profile);
         });
     });
 });
@@ -87,10 +86,9 @@ router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) =>
 router.post('/:id/peaks', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   queries.addNewUserGoal(req.body)
     .then(response => {
-      res.json(response);
-      // res.json({
-      //   message: "New Mountain Added"
-      // });
+      res.json({
+        message: "New Mountain Added"
+      });
     })
 });
 
@@ -99,7 +97,7 @@ router.put('/:id/peaks', isValidId, authMiddleware.allowAccess, (req,res,next) =
     .then(response => {
       res.json({
         message: "Goal Complete"
-      })
+      });
     });
 });
 
