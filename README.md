@@ -1,4 +1,4 @@
-# CO14 Database
+# CO14 Server
 
 CO14 is a full stack app that allows its users to track Colorado 14er’s and their completion progress.
 
