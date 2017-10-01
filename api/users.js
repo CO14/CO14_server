@@ -12,6 +12,10 @@ function isValidId(req, res, next) {
   }
 }
 
+router.get('/', (req, res) => {
+  res.json('Connected')
+});
+
 router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   queries.getUserProfilePeak(req.params.id)
     .then(accounts => {
