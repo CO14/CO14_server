@@ -13,14 +13,14 @@ function isUserValid(account) {
   const hasValidEmail = validEmailAddress(account.email);
   const hasValidPassword = validPassword(account.password)
   return hasValidEmail && hasValidFirstName && hasValidLastName && hasValidPassword;
-}
+};
 
 // Validation for Login
 function isLoginValid(account) {
   const hasValidEmail = validEmailAddress(account.email);
   const hasValidPassword = validPassword(account.password);
   return hasValidEmail && hasValidPassword;
-}
+};
 
 // Validation for email address
 function validEmailAddress(useremail) {
@@ -29,8 +29,8 @@ function validEmailAddress(useremail) {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 // Validation for password, Password must contain be 8-16 charachters, contain 1 upper and lower case, 1 numeric and a special character
 function validPassword(userPassword) {
@@ -39,14 +39,14 @@ function validPassword(userPassword) {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 router.get('/', (req, res) => {
   res.json({
     message: "Endpoint Works"
-  })
-})
+  });
+});
 
 //SIGNUP
 router.post('/signup', (req, res, next) => {
@@ -76,6 +76,7 @@ router.post('/signup', (req, res, next) => {
                   }, (err, token) => {
                     console.log('err ', err);
                     console.log('token', token);
+                    console.log('id', id);
                     res.json({
                       id,
                       email: account.email,
