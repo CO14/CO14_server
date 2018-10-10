@@ -8,9 +8,9 @@ function isValidId(req, res, next) {
   if (!isNaN(req.params.id)) {
     return next();
   } else {
-    next(new Error("Invalid ID"));
-  };
-};
+    next(new Error('Invalid ID'));
+  }
+}
 
 router.get('/', (req, res) => {
   res.json('Connected');
@@ -31,8 +31,8 @@ router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
           facebook_url: acct.facebook_url,
           instagram_url: acct.instagram_url,
           twitter_url: acct.twitter_url,
-          peak: []
-        }
+          peak: [],
+        };
         userProfile.push(userInstance);
         userCollection[acct.account_id] = userInstance;
       }
@@ -49,10 +49,10 @@ router.get('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
         is_complete: acct.is_complete,
         date_complete: acct.date_complete,
         range_id: acct.range_id,
-        range_name: acct.name
+        range_name: acct.name,
       });
     });
-    res.json(userProfile)
+    res.json(userProfile);
   });
 });
 
@@ -66,7 +66,7 @@ router.put('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
       image: req.body.image,
       facebook_url: req.body.facebook_url,
       instagram_url: req.body.instagram_url,
-      twitter_url: req.body.twitter_url
+      twitter_url: req.body.twitter_url,
     };
     queries.updateUserProfile(account).then(profile => {
       console.log(profile);
@@ -75,37 +75,57 @@ router.put('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
   });
 });
 
-router.delete('/:id', isValidId, authMiddleware.allowAccess, (req, res, next) => {
-  queries.deleteUserProfile(req.body).then(response => {
-    res.json({
-      message: "Profile Deleted"
+router.delete(
+  '/:id',
+  isValidId,
+  authMiddleware.allowAccess,
+  (req, res, next) => {
+    queries.deleteUserProfile(req.body).then(response => {
+      res.json({
+        message: 'Profile Deleted',
+      });
     });
-  });
-});
+  }
+);
 
-router.post('/:id/peaks', isValidId, authMiddleware.allowAccess, (req, res, next) => {
-  queries.addNewUserGoal(req.body).then(response => {
-    res.json({
-      message: "New Mountain Added"
+router.post(
+  '/:id/peaks',
+  isValidId,
+  authMiddleware.allowAccess,
+  (req, res, next) => {
+    queries.addNewUserGoal(req.body).then(response => {
+      res.json({
+        message: 'New Mountain Added',
+      });
     });
-  });
-});
+  }
+);
 
-router.put('/:id/peaks', isValidId, authMiddleware.allowAccess, (req, res, next) => {
-  console.log("REQ.BODY: ", req.body);
-  queries.updateUserGoal(req.body).then(response => {
-    res.json({
-      message: "Goal Complete"
+router.put(
+  '/:id/peaks',
+  isValidId,
+  authMiddleware.allowAccess,
+  (req, res, next) => {
+    console.log('REQ.BODY: ', req.body);
+    queries.updateUserGoal(req.body).then(response => {
+      res.json({
+        message: 'Goal Complete',
+      });
     });
-  });
-});
+  }
+);
 
-router.delete('/:id/peaks', isValidId, authMiddleware.allowAccess, (req, res, next) => {
-  queries.deleteUserGoal(req.body).then(response => {
-    res.json({
-      message: "Goal Deleted"
+router.delete(
+  '/:id/peaks',
+  isValidId,
+  authMiddleware.allowAccess,
+  (req, res, next) => {
+    queries.deleteUserGoal(req.body).then(response => {
+      res.json({
+        message: 'Goal Deleted',
+      });
     });
-  });
-});
+  }
+);
 
 module.exports = router;

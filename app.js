@@ -8,12 +8,14 @@ const app = express();
 
 require('dotenv').config();
 
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials: true,
-  methods: "GET,PUT,POST,DELETE",
-  preflightContinue: false
-}));
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+    methods: 'GET,PUT,POST,DELETE',
+    preflightContinue: false,
+  })
+);
 
 const users = require('./api/users');
 const peaks = require('./api/peaks');
@@ -22,9 +24,11 @@ const authMiddleware = require('./auth/middleware');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
 app.use(cookieParser());
 
 app.use(authMiddleware.checkTokenSetUser);
@@ -44,7 +48,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: req.app.get('env') === 'development' ? err : {}
+    error: req.app.get('env') === 'development' ? err : {},
   });
 });
 

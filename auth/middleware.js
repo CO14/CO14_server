@@ -2,15 +2,15 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 function checkTokenSetUser(req, res, next) {
-  const tokenHeader = req.get("Authorization");
+  const tokenHeader = req.get('Authorization');
   if (tokenHeader) {
-    const token = tokenHeader.split(" ")[1];
+    const token = tokenHeader.split(' ')[1];
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
       if (err) {
         next();
       } else {
         req.user = decoded;
-        console.log("req.user: ", req.user);
+        console.log('req.user: ', req.user);
         next();
       }
     });
@@ -19,18 +19,18 @@ function checkTokenSetUser(req, res, next) {
   }
 }
 
-function allowAccess(req, res, next){
-  console.log("user: ", req.user.id);
-  console.log("params: ", req.params.id);
-  if(req.user.id == req.params.id){
+function allowAccess(req, res, next) {
+  console.log('user: ', req.user.id);
+  console.log('params: ', req.params.id);
+  if (req.user.id == req.params.id) {
     next();
-  }else{
-    res.status(401)
-    next(new Error('Un-Authorized'))
+  } else {
+    res.status(401);
+    next(new Error('Un-Authorized'));
   }
 }
 
 module.exports = {
   allowAccess,
-  checkTokenSetUser
-}
+  checkTokenSetUser,
+};
